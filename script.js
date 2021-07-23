@@ -2,9 +2,44 @@
 
 const PERMISSION_GANDER = [ 'male' , 'female' , 'non-binary' , 'transgender' , 'intersex' , 'n/a' ] ;
 
+const secretFunctionName = function ( currentValue ) {
+    let value ;
+    return function ( currentValue ) { 
+        if ( currentValue !== undefined ) value = currentValue.trim() ;
+        return value ;
+    } ;
+}
+const _name = secretFunctionName () ;
+
+const secretFunctionAge = function ( currentValue ) {
+    let value ;
+    return function ( currentValue ) { 
+        if ( currentValue !== undefined ) {
+            currentValue = parseInt ( currentValue ) ;
+            if( currentValue > 0 && currentValue <= 120 ) {
+                value = currentValue ;
+            }
+        } 
+        return value ;
+    } ;
+}
+const _age = secretFunctionAge () ;
+
+const secretFunctionGander = function ( currentValue ) {
+    let value ;
+    return function ( currentValue ) { 
+        if ( currentValue !== undefined ) {
+            currentValue = currentValue.trim().toLowerCase() ;
+            if( PERMISSION_GANDER.includes( currentValue ) ) value = currentValue ;
+        } 
+        return value ;
+    } ;
+}
+const _gander = secretFunctionGander () ;
+
 const newPerson = {
 
-    _name : undefined ,    
+    _name : _name() ,    
     get name() {
         return this._name ;
     } ,
@@ -12,7 +47,7 @@ const newPerson = {
         this._name = value.trim () ;
     } ,
 
-    _age : undefined ,
+    _age : _age() ,
     get age() {
         return this._age ;
     } ,
@@ -24,7 +59,7 @@ const newPerson = {
         }
     } ,
 
-    _gander : undefined ,
+    _gander : _gander() ,
     get gander()  {
         return this._gander ;
     } ,
@@ -35,20 +70,20 @@ const newPerson = {
 
 }
 
-Object.defineProperty ( newPerson , 'name' , {
-    enumerable : false ,
-    configurable : false
+Object.defineProperties ( newPerson , {
+    'name' : {
+        enumerable : false ,
+        configurable : false
+    } ,
+    'age' : {
+        enumerable : false ,
+        configurable : false
+    } ,
+    'gander' : {
+        enumerable : false ,
+        configurable : false
+    }
 } ) ;
-
-Object.defineProperty ( newPerson , 'age' , {
-    enumerable : false ,
-    configurable : false
-} ) ;
-
-Object.defineProperty ( newPerson , 'gander' , {
-    enumerable : false ,
-    configurable : false
-} ) 
 
 newPerson.name = ' bob' ;
 newPerson.gander = ' Male' ;
