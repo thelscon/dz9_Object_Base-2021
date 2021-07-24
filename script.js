@@ -37,49 +37,22 @@ const secretFunctionGander = function ( currentValue ) {
 }
 const _gander = secretFunctionGander () ;
 
-const newPerson = {
-
-    _name : _name() ,    
-    get name() {
-        return this._name ;
-    } ,
-    set name ( value ) {
-        this._name = value.trim () ;
-    } ,
-
-    _age : _age() ,
-    get age() {
-        return this._age ;
-    } ,
-    set age( value ) {
-        if( parseInt( value ) ) {
-            value = parseInt( value ) ;
-            if( value > 0 && value <= 120 )
-                this._age = value ;                
-        }
-    } ,
-
-    _gander : _gander() ,
-    get gander()  {
-        return this._gander ;
-    } ,
-    set gander( value ) {
-        value = value.trim().toLowerCase() ;
-        if( PERMISSION_GANDER.includes( value ) ) this._gander = value ;
-    }
-
-}
-
-Object.defineProperties ( newPerson , {
+const newPerson = Object.defineProperties ( {} , {  //инициализируем прототип
     'name' : {
+        get : function () { return _name () } ,
+        set : function ( value ) { _name ( value ) } ,
         enumerable : false ,
         configurable : false
     } ,
     'age' : {
+        get : function () { return _age () } ,
+        set : function ( value ) { _age ( value ) } ,
         enumerable : false ,
         configurable : false
     } ,
     'gander' : {
+        get : function () { return _gander () } ,
+        set : function ( value ) { _gander ( value ) } ,
         enumerable : false ,
         configurable : false
     }
