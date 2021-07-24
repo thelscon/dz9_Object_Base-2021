@@ -37,7 +37,7 @@ const secretFunctionGander = function ( currentValue ) {
 }
 const _gander = secretFunctionGander () ;
 
-const newPerson = Object.defineProperties ( {} , {  //инициализируем прототип
+const newPerson = Object.defineProperties ( {} , {
     'name' : {
         get : function () { return _name () } ,
         set : function ( value ) { _name ( value ) } ,
