@@ -1,6 +1,6 @@
 'use strict' ;
 
-const Person = function () {
+const Person = function ( name , age , gander ) {
     const PERMISSION_GANDER = [ 'male' , 'female' , 'non-binary' , 'transgender' , 'intersex' , 'n/a' ] ;
 
     const secretFunctionName = function ( currentValue ) {
@@ -38,7 +38,7 @@ const Person = function () {
     }
     const _gander = secretFunctionGander () ;
 
-    return Object.defineProperties ( {} , {
+    const returnObject = Object.defineProperties ( {} , {
         'name' : {
             get : function () { return _name () } ,
             set : function ( value ) { _name ( value ) } ,
@@ -58,9 +58,14 @@ const Person = function () {
             configurable : false
         }
     } ) ;
+    returnObject.name = name ;
+    returnObject.age = age ;
+    returnObject.gander = gander ;
+
+    return returnObject ;
 }
 
-const newPerson = Person () ;
+const newPerson = Person ( ' bob' , 120 , ' Male' ) ;
 newPerson.name = ' bob' ;
 newPerson.gander = ' Male' ;
 newPerson.age = 120 ;
